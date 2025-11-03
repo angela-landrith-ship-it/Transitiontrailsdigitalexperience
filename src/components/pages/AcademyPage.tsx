@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BookOpen, Video, Award, Search, Filter } from 'lucide-react';
 import { TTButton } from '../TTButton';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { SearchBar } from '../SearchBar';
 
 interface AcademyPageProps {
   onNavigate: (page: string) => void;
@@ -10,6 +11,7 @@ interface AcademyPageProps {
 export function AcademyPage({ onNavigate }: AcademyPageProps) {
   const [filter, setFilter] = useState('all');
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // SALESFORCE CMS INTEGRATION: Replace with Course__c query
   // SELECT Course_ID__c, Name, Category__c, Duration__c, Level__c, Instructor__r.Name, Instructor__r.Photo_URL__c, 
@@ -102,7 +104,16 @@ export function AcademyPage({ onNavigate }: AcademyPageProps) {
     },
   ];
 
-  const filteredCourses = filter === 'all' ? courses : courses.filter(c => c.category === filter);
+  // Filter by category and search query
+  const filteredCourses = courses.filter(course => {
+    const matchesCategory = filter === 'all' || course.category === filter;
+    const matchesSearch = searchQuery === '' || 
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      course.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      course.level.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+  
   const selectedCourseData = courses.find(c => c.id === selectedCourse);
 
   if (selectedCourse && selectedCourseData) {
@@ -236,9 +247,16 @@ export function AcademyPage({ onNavigate }: AcademyPageProps) {
         </div>
       </section>
 
-      {/* Filters */}
+      {/* Search and Filters */}
       <section className="py-12 px-4 sm:px-6 lg:px-20 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto space-y-6">
+          {/* Search Bar */}
+          <SearchBar 
+            onSearch={setSearchQuery}
+            placeholder="Search courses, skills, or topics..."
+          />
+          
+          {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
             <div className="flex items-center gap-2">
               <Filter size={20} className="text-gray-500" />

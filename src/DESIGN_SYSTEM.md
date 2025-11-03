@@ -250,6 +250,168 @@ Used for CTA buttons to draw attention.
 
 ---
 
+## AI Assistant Component
+
+### Overview
+An intelligent chatbot that provides contextual help and guidance to visitors.
+
+**Component:** `/components/AIAssistant.tsx`
+
+### States
+
+**1. Minimized (Floating Button)**
+- Position: Fixed bottom-right (bottom: 32px, right: 32px)
+- Size: 56px × 56px circle
+- Background: Evergreen (#2F6B4E)
+- Icon: MessageCircle (white)
+- Pulse indicator: Small amber dot (animated)
+- Tooltip on hover: "Need help? Ask me anything!"
+
+**2. Expanded (Chat Window)**
+- Dimensions: 400px wide × 600px tall
+- Border: 2px solid Sun Amber (#F59E33)
+- Border radius: 16px
+- Shadow: `0 8px 32px rgba(0,0,0,0.15)`
+- Position: Bottom-right, 32px offset
+
+### Layout Sections
+
+**Header:**
+- Background: Gradient (Evergreen → Summit Teal)
+- Height: 64px
+- Contains: AI avatar, title "Trail Guide AI", subtitle "Powered by Salesforce Einstein"
+- Close button (X icon, white)
+
+**Messages Area:**
+- Background: #F9FAFB (light gray)
+- Padding: 16px
+- Scrollable (ScrollArea component)
+- Auto-scrolls to latest message
+
+**Input Area:**
+- Background: White
+- Border-top: 1px solid gray-200
+- Padding: 16px
+- Contains: Text input + Send button (Evergreen background)
+
+### Message Bubbles
+
+**User Messages:**
+- Background: Evergreen (#2F6B4E)
+- Text: White
+- Alignment: Right
+- Border radius: 16px (rounded-br-sm for tail effect)
+- Max width: 80%
+
+**Assistant Messages:**
+- Background: White
+- Text: Gray-800
+- Alignment: Left
+- Border radius: 16px (rounded-bl-sm for tail effect)
+- Shadow: `0 2px 8px rgba(0,0,0,0.1)`
+- Max width: 80%
+
+**Suggestion Chips:**
+- Background: Trail Cream (#F2EAD3)
+- Hover: Sun Amber (#F59E33) with white text
+- Padding: 8px 12px
+- Border radius: 8px
+- Font size: 14px
+- Full width within message bubble
+
+### Animations
+
+**Widget Pop-in:**
+```css
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+```
+
+**Typing Indicator:**
+```tsx
+<Loader2 className="animate-spin" />
+"Trail Guide is typing..."
+```
+
+**Hover Effects:**
+- Button scale: 1.1 on hover (110%)
+- Suggestion chip background transition: 200ms
+
+### Context-Aware Behavior
+
+The assistant changes its greeting and suggestions based on the current page:
+
+```tsx
+<AIAssistant currentPage="academy" />
+```
+
+**Example Greetings:**
+
+| Page | Greeting |
+|------|----------|
+| Home | "Hi! I'm your Transition Trails guide..." |
+| Academy | "Welcome to the Academy! I can help you find courses..." |
+| Support | "Thank you for your interest in supporting our mission..." |
+| Dashboard | "Welcome back! I can help you navigate your active trails..." |
+
+### Accessibility
+
+- **Keyboard Navigation:**
+  - Tab through input and buttons
+  - Enter to send message
+  - Escape to close widget
+
+- **ARIA Labels:**
+  - `aria-label="Open AI Assistant"` on floating button
+  - `aria-label="Close assistant"` on X button
+  - `aria-label="Send message"` on send button
+
+- **Screen Reader:**
+  - Message announcements with `role="log"` and `aria-live="polite"`
+  - Clear focus indicators
+
+### Props
+
+```tsx
+interface AIAssistantProps {
+  currentPage?: string; // Current page context
+}
+```
+
+### Usage Example
+
+```tsx
+import { AIAssistant } from './components/AIAssistant';
+
+// In App.tsx
+<AIAssistant currentPage={currentPage} />
+```
+
+### Mobile Considerations
+
+On screens <768px:
+- Widget expands to full screen
+- Input area sticks to bottom
+- Close button prominent in header
+- Larger touch targets (48px minimum)
+
+### Integration Notes
+
+**Salesforce Einstein GPT:**
+- Replace mock responses with Einstein API calls
+- Endpoint: `/services/data/v58.0/einstein/ai/conversations`
+- Include session ID for context persistence
+- Track conversation metrics in custom object
+
+**Privacy:**
+- Add disclaimer: "AI responses are helpful but may not always be perfect"
+- Log conversations for improvement (with user consent)
+- 90-day retention policy
+- Option to clear chat history
+
+---
+
 ## Icons
 
 ### Icon Library: Lucide React

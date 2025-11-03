@@ -1,6 +1,7 @@
 import { Heart, HandHeart, Users, TrendingUp } from 'lucide-react';
 import { TTButton } from '../TTButton';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { NewsletterSignup } from '../NewsletterSignup';
 
 interface SupportPageProps {
   onNavigate: (page: string) => void;

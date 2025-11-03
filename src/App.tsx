@@ -9,6 +9,9 @@ import { ServicesPage } from './components/pages/ServicesPage';
 import { SupportPage } from './components/pages/SupportPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { DashboardPage } from './components/pages/DashboardPage';
+import { CookieConsent } from './components/CookieConsent';
+import { BackToTop } from './components/BackToTop';
+import { AIAssistant } from './components/AIAssistant';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -49,6 +52,9 @@ export default function App() {
         {renderPage()}
       </main>
       <Footer onNavigate={handleNavigate} />
+      <CookieConsent />
+      <BackToTop />
+      <AIAssistant currentPage={currentPage} />
     </div>
   );
 }

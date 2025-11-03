@@ -482,6 +482,263 @@ Add to head markup:
 
 ---
 
+## Phase 11: Configure AI Assistant (Einstein GPT) (90 min)
+
+### Enable Einstein Features
+1. Setup → Einstein Setup → Einstein Platform
+2. Enable Einstein for Experience Cloud
+3. Activate Einstein Bots
+4. Enable Einstein GPT (if available in your org)
+
+### Create Einstein Bot
+
+**Bot Configuration:**
+1. Setup → Einstein Bots → New Bot
+2. Name: `Trail Guide AI`
+3. API Name: `Trail_Guide_AI`
+4. Language: English
+5. Template: Custom
+
+**Dialog Flows:**
+
+Create intent-based dialogs for:
+
+**1. Course Recommendation Intent**
+```
+Intent: course_recommendation
+Training Phrases:
+- "I'm looking for a course"
+- "Which course should I take"
+- "I'm new to Salesforce"
+- "Beginner courses"
+- "What should I learn first"
+
+Response:
+Based on your experience level, I recommend:
+- Beginners: Visitor's Trail
+- Intermediate: Guided Trail or specific courses
+- Advanced: Trail of Mastery
+
+Action: Show relevant course cards with enrollment links
+```
+
+**2. Donation Intent**
+```
+Intent: donation_inquiry
+Training Phrases:
+- "How can I donate"
+- "I want to give"
+- "Support your mission"
+- "Make a contribution"
+
+Response:
+Thank you for wanting to support! Options:
+- One-time donation
+- Monthly giving (Trailblazer Circle)
+- Corporate matching
+
+Action: Direct to donation page with pre-filled form
+```
+
+**3. Volunteer Intent**
+```
+Intent: volunteer_inquiry
+Training Phrases:
+- "How can I volunteer"
+- "I want to help"
+- "Volunteer opportunities"
+- "Become a mentor"
+
+Response:
+We'd love your help! Current opportunities:
+- Guest Instructors
+- Mentors
+- Career Coaches
+- Content Creators
+
+Action: Show volunteer application form
+```
+
+**4. Trail Comparison Intent**
+```
+Intent: trail_comparison
+Training Phrases:
+- "Compare trails"
+- "Difference between trails"
+- "Which trail is best for me"
+
+Response:
+Let me help you choose:
+- Visitor's Trail: 4-6 weeks, beginner, free
+- Guided Trail: 12 weeks, intermediate, instructor-led
+- Trail of Mastery: 16-20 weeks, advanced, certification
+- Explorer's Journey: Self-paced, all levels
+
+Action: Show comparison table or quiz
+```
+
+### Configure API Integration
+
+**Connect Bot to Experience Cloud:**
+1. Bot Settings → Deployment
+2. Add to Experience Cloud site
+3. Configure button appearance:
+   - Color: Evergreen (#2F6B4E)
+   - Accent: Sun Amber (#F59E33)
+   - Position: Bottom-right
+
+**Embedded Chat Component:**
+```html
+<!-- Add to site template -->
+<div id="einstein-chat-widget"></div>
+<script type="text/javascript">
+  var einsteinSettings = {
+    baseLiveAgentContentURL: 'https://c.la1-core1.sfdc-communities.com/content',
+    deploymentId: 'YOUR_DEPLOYMENT_ID',
+    buttonId: 'YOUR_BUTTON_ID',
+    baseLiveAgentURL: 'https://d.la1-core1.sfdc-communities.com/chat',
+    eswLiveAgentDevName: 'Trail_Guide_AI',
+    isOfflineSupportEnabled: false
+  };
+</script>
+```
+
+### Train the Bot
+
+**Upload Training Data:**
+
+1. Create CSV with sample conversations:
+```csv
+User_Message,Intent,Bot_Response
+"I'm new to Salesforce",course_recommendation,"I recommend starting with our Visitor's Trail..."
+"How much does certification cost",pricing_inquiry,"Our Admin Certification Prep is $299..."
+"Can I volunteer",volunteer_inquiry,"We'd love to have you! Current opportunities include..."
+```
+
+2. Import via Setup → Einstein Bots → Import Training Data
+
+3. Test bot with sample queries
+
+4. Review and improve based on confidence scores
+
+### Context Variables
+
+Set up dynamic variables for personalization:
+
+```javascript
+// User context
+{
+  "isAuthenticated": true/false,
+  "currentPage": "academy",
+  "hasActiveTrail": true/false,
+  "userLevel": "beginner|intermediate|advanced",
+  "previousIntent": "course_search"
+}
+
+// Use in bot responses
+"Welcome back, {!User.FirstName}! I see you're on the {!ActiveTrail.Name}."
+```
+
+### Handoff to Live Agent (Optional)
+
+Configure escalation when bot can't help:
+
+1. Setup → Chat Settings → Create Chat Button
+2. Configure routing to support team
+3. Add handoff dialog in bot:
+   - Trigger: Low confidence (<0.7) or user requests human
+   - Action: Transfer to agent queue
+
+### Analytics Dashboard
+
+**Create Bot Performance Report:**
+1. Reports → New Report → Einstein Bot Metrics
+2. Track:
+   - Conversations initiated
+   - Intent recognition rate
+   - Average conversation length
+   - Handoff rate
+   - User satisfaction
+
+**Custom Dashboard:**
+- Total conversations (by page)
+- Top intents
+- Unresolved queries
+- Conversion rate (chat → enrollment/donation)
+
+### Testing the AI Assistant
+
+**Test Scenarios:**
+
+✅ **Navigation Help:**
+- "Where can I find free courses?"
+- "How do I contact support?"
+- "Show me the dashboard"
+
+✅ **Course Guidance:**
+- "I'm a complete beginner"
+- "Which certification should I get?"
+- "Compare your courses"
+
+✅ **Support Queries:**
+- "How can I donate $100?"
+- "I want to volunteer 5 hours a week"
+- "Tell me about partnerships"
+
+✅ **Context Awareness:**
+- Ask "What's this page about?" on each page
+- Verify contextual suggestions appear
+- Check that responses match page content
+
+✅ **Error Handling:**
+- Gibberish input
+- Off-topic questions
+- Multiple questions at once
+
+### Einstein GPT Advanced Setup (If Available)
+
+**Enable Generative AI:**
+1. Setup → Einstein GPT
+2. Connect to OpenAI or use Salesforce LLM
+3. Configure prompt templates:
+
+```
+Template: course_recommendation_prompt
+---
+You are a helpful learning advisor for Transition Trails, a nonprofit providing Salesforce training.
+
+User Context:
+- Experience Level: {!userLevel}
+- Current Page: {!currentPage}
+- Previous Courses: {!completedCourses}
+
+User Question: {!userMessage}
+
+Provide a helpful, friendly response that:
+1. Recommends appropriate courses or trails
+2. Explains why it's a good fit
+3. Offers next steps (enrollment links)
+4. Maintains encouraging, supportive tone
+
+Response:
+```
+
+### Monitoring & Optimization
+
+**Weekly Reviews:**
+- Check bot analytics
+- Review low-confidence conversations
+- Add new training phrases
+- Update responses based on feedback
+
+**Monthly Improvements:**
+- Analyze top unresolved queries
+- Create new intents if needed
+- Refine existing dialog flows
+- Test with real users
+
+---
+
 ## Maintenance & Support
 
 ### Weekly Tasks

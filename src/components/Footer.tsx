@@ -103,8 +103,14 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-[var(--tt-sky-blue)] mt-12 pt-8 text-center text-[var(--tt-trail-cream)]">
-          <p>© 2025 Transition Trails. Built for Salesforce Experience Cloud. Designed for growth, inclusion, and digital empowerment.</p>
+        <div className="border-t border-[var(--tt-sky-blue)] mt-12 pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-[var(--tt-trail-cream)]">
+            <p>© 2025 Transition Trails. Built for Salesforce Experience Cloud. Designed for growth, inclusion, and digital empowerment.</p>
+            <div className="flex gap-4">
+              <button className="hover:text-white transition-colors">Privacy Policy</button>
+              <button className="hover:text-white transition-colors">Terms of Service</button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

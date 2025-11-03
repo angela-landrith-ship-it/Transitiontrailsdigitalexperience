@@ -267,6 +267,126 @@ All images should be stored in Salesforce CMS and referenced via secure URLs.
 
 ---
 
+## AI Assistant Integration (Einstein GPT)
+
+### Overview
+The site includes an **AI-powered Digital Experience Assistant** that helps visitors navigate, find resources, and get answers to common questions.
+
+### Component
+- **Location:** `/components/AIAssistant.tsx`
+- **Integration:** Salesforce Einstein GPT / Einstein Bots
+- **Positioning:** Fixed bottom-right, context-aware per page
+
+### Features
+- **Context-Aware Greetings:** Different welcome message per page
+- **Guided Prompts:** Clickable suggestion chips based on page context
+- **Intent Detection:** Understands queries about courses, donations, trails, etc.
+- **Conversational Memory:** Maintains context within chat session
+- **Handoff Capability:** Can escalate to live support if needed
+
+### Einstein GPT Configuration
+
+**Required Setup:**
+1. Enable Einstein GPT in Salesforce org
+2. Create AI Bot for Digital Experience
+3. Configure intents and training data
+4. Set up API access for chat widget
+
+**API Endpoints:**
+```javascript
+// Einstein Conversation API
+POST /services/data/v58.0/einstein/ai/conversations
+
+// Request body
+{
+  "sessionId": "unique-session-id",
+  "message": "User query here",
+  "context": {
+    "page": "academy",
+    "authenticated": false,
+    "previousIntent": "course_search"
+  }
+}
+
+// Response
+{
+  "reply": "AI-generated response",
+  "suggestions": ["Follow-up 1", "Follow-up 2"],
+  "intent": "course_recommendation",
+  "confidence": 0.95
+}
+```
+
+### Training Data Categories
+
+**1. Navigation Intents**
+- Find courses
+- Browse trails
+- Contact information
+- Account/dashboard access
+
+**2. Learning Path Intents**
+- Beginner recommendations
+- Certification guidance
+- Free vs paid courses
+- Course comparison
+
+**3. Support Intents**
+- Donation process
+- Volunteer opportunities
+- Partnership inquiries
+- Technical support
+
+**4. Nonprofit Services**
+- Service offerings
+- Consultation scheduling
+- Pricing information
+- Case studies
+
+### Page-Specific Context
+
+Each page provides contextual suggestions:
+
+| Page | Welcome Message | Suggested Prompts |
+|------|----------------|-------------------|
+| Home | General introduction | "Which trail is right for me?", "Tell me about free courses", "How can I volunteer?" |
+| Trails | Trail selection help | "I'm new to Salesforce", "I want certification prep", "Compare the trails" |
+| Academy | Course guidance | "Show me beginner courses", "What certifications do you offer?", "Are there free courses?" |
+| Services | Nonprofit solutions | "Schedule a consultation", "What services do you offer?", "Pricing information" |
+| Support | Giving options | "How can I donate?", "What volunteer roles are open?", "Tell me about partnerships" |
+| Dashboard | Personal assistant | "What should I learn next?", "Show my progress", "Upcoming events" |
+
+### Custom Object for Chat History (Optional)
+
+**AI_Conversation__c:**
+- `User__c` (Lookup to User)
+- `Session_ID__c` (Text) - Unique session identifier
+- `Message__c` (Long Text Area) - User message
+- `Response__c` (Long Text Area) - AI response
+- `Intent__c` (Text) - Detected intent
+- `Confidence__c` (Number) - Confidence score
+- `Page_Context__c` (Text) - Page where conversation occurred
+- `Timestamp__c` (Date/Time)
+- `Resolved__c` (Checkbox) - Whether query was answered
+
+### Analytics & Optimization
+
+**Track:**
+- Most common queries
+- Unresolved intents (low confidence)
+- Conversation completion rate
+- Pages with highest engagement
+- Conversion from chat to enrollment/donation
+
+**Dashboard Metrics:**
+- Total conversations
+- Average messages per session
+- Top intents by page
+- Escalation rate to live support
+- User satisfaction (post-chat rating)
+
+---
+
 ## API Integration Points
 
 ### Key Queries
