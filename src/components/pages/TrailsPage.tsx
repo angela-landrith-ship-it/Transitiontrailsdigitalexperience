@@ -11,6 +11,9 @@ interface TrailsPageProps {
 export function TrailsPage({ onNavigate }: TrailsPageProps) {
   const [selectedTrail, setSelectedTrail] = useState<string | null>(null);
 
+  // SALESFORCE CMS INTEGRATION: Replace with Trail_Program__c query
+  // SELECT Trail_ID__c, Name, Tagline__c, Description__c, Image_URL__c, Duration__c, Level__c, Time_Commitment__c, Topics__c
+  // WHERE Is_Active__c = true ORDER BY Display_Order__c
   const trails = [
     {
       id: 'visitors',

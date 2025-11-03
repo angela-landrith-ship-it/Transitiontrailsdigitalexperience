@@ -11,6 +11,10 @@ export function AcademyPage({ onNavigate }: AcademyPageProps) {
   const [filter, setFilter] = useState('all');
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
 
+  // SALESFORCE CMS INTEGRATION: Replace with Course__c query
+  // SELECT Course_ID__c, Name, Category__c, Duration__c, Level__c, Instructor__r.Name, Instructor__r.Photo_URL__c, 
+  //        Price__c, Description__c, Lesson_Count__c, Enrolled_Count__c, Image_URL__c
+  // WHERE Is_Active__c = true ORDER BY Display_Order__c
   const courses = [
     {
       id: 'salesforce-basics',

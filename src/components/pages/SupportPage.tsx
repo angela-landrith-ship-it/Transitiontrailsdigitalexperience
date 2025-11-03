@@ -7,6 +7,8 @@ interface SupportPageProps {
 }
 
 export function SupportPage({ onNavigate }: SupportPageProps) {
+  // SALESFORCE CMS INTEGRATION: Replace with Impact_Stat__c query
+  // WHERE Category__c = 'Support' AND Is_Active__c = true ORDER BY Display_Order__c
   const impactStats = [
     { number: '500+', label: 'Lives Changed', icon: <Users size={32} /> },
     { number: '$2.5M', label: 'Community Value', icon: <TrendingUp size={32} /> },
@@ -64,6 +66,8 @@ export function SupportPage({ onNavigate }: SupportPageProps) {
     },
   ];
 
+  // SALESFORCE CMS INTEGRATION: Replace with Partner__c query
+  // SELECT Name, Logo_URL__c, Website__c WHERE Is_Active__c = true ORDER BY Display_Order__c
   const partners = [
     'Salesforce.org',
     'TechSoup',

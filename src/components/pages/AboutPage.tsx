@@ -34,13 +34,45 @@ export function AboutPage() {
     },
   ];
 
+  // SALESFORCE CMS INTEGRATION: Replace with Team_Member__c object query
+  // Fields: Name, Title__c, Role__c, Photo_URL__c, Bio__c (optional)
   const team = [
-    { name: 'Dr. Maria Rodriguez', role: 'Founder & Executive Director', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400' },
-    { name: 'James Chen', role: 'Director of Learning', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400' },
-    { name: 'Aisha Williams', role: 'Nonprofit Services Lead', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400' },
-    { name: 'Marcus Thompson', role: 'Technology Director', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400' },
-    { name: 'Sofia Patel', role: 'Community Manager', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400' },
-    { name: 'David Kim', role: 'Lead Instructor', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400' },
+    { 
+      name: 'Dr. Maria Rodriguez', 
+      title: 'Founder & Executive Director',
+      role: 'Leadership',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400' 
+    },
+    { 
+      name: 'James Chen', 
+      title: 'Director of Learning',
+      role: 'Education',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400' 
+    },
+    { 
+      name: 'Aisha Williams', 
+      title: 'Nonprofit Services Lead',
+      role: 'Consulting',
+      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400' 
+    },
+    { 
+      name: 'Marcus Thompson', 
+      title: 'Technology Director',
+      role: 'Technology',
+      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400' 
+    },
+    { 
+      name: 'Sofia Patel', 
+      title: 'Community Manager',
+      role: 'Community',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400' 
+    },
+    { 
+      name: 'David Kim', 
+      title: 'Lead Instructor',
+      role: 'Education',
+      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400' 
+    },
   ];
 
   return (
@@ -161,6 +193,7 @@ export function AboutPage() {
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="mb-2">{member.name}</h3>
+                  <p className="text-[var(--tt-evergreen)] mb-1">{member.title}</p>
                   <p className="text-[var(--tt-sky-blue)]">{member.role}</p>
                 </div>
               </div>

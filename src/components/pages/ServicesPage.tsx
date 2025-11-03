@@ -7,6 +7,8 @@ interface ServicesPageProps {
 }
 
 export function ServicesPage({ onNavigate }: ServicesPageProps) {
+  // SALESFORCE CMS INTEGRATION: Replace with Service_Offering__c query
+  // SELECT Name, Description__c, Features__c, Icon_Name__c WHERE Is_Active__c = true
   const services = [
     {
       icon: <Cloud size={40} />,
@@ -34,6 +36,8 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
     },
   ];
 
+  // SALESFORCE CMS INTEGRATION: Replace with Testimonial__c query
+  // WHERE Category__c = 'Nonprofit' AND Is_Active__c = true
   const testimonials = [
     {
       org: 'Community Action Network',

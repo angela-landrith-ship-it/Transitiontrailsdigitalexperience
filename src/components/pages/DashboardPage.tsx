@@ -7,6 +7,11 @@ interface DashboardPageProps {
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
+  // SALESFORCE CMS INTEGRATION: This is a fully authenticated, personalized page
+  // Replace all data with queries filtered by current User ID
+  // See DEVELOPER_HANDOFF.md for Trail_Progress__c and Event__c queries
+  
+  // Query: Trail_Progress__c WHERE User__c = :currentUserId AND Status__c = 'In Progress'
   const activeTrails = [
     {
       title: 'Salesforce Fundamentals',
@@ -32,6 +37,8 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
     { title: 'Quick Learner', icon: '⚡', description: 'Completed 5 lessons in one week' },
   ];
 
+  // SALESFORCE CMS INTEGRATION: Event__c query
+  // WHERE Event_Date__c >= TODAY AND Is_Active__c = true ORDER BY Event_Date__c LIMIT 5
   const upcomingEvents = [
     { title: 'Career Coaching Session', date: 'Nov 8, 2025', time: '2:00 PM', type: 'Coaching' },
     { title: 'Salesforce Admin Webinar', date: 'Nov 12, 2025', time: '6:00 PM', type: 'Workshop' },

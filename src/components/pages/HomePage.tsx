@@ -7,6 +7,9 @@ interface HomePageProps {
 }
 
 export function HomePage({ onNavigate }: HomePageProps) {
+  // SALESFORCE CMS INTEGRATION: This page pulls from multiple CMS objects
+  // See DEVELOPER_HANDOFF.md for complete data model
+  
   const audiences = [
     {
       icon: <Users size={48} />,
@@ -31,6 +34,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
     },
   ];
 
+  // SALESFORCE CMS INTEGRATION: Replace with Testimonial__c query
+  // WHERE Is_Featured__c = true AND Category__c = 'Learner' OR 'Nonprofit' OR 'Volunteer'
   const testimonials = [
     {
       name: 'Sarah Martinez',

@@ -2,6 +2,10 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { TTButton } from '../TTButton';
 
 export function ContactPage() {
+  // SALESFORCE CMS INTEGRATION: 
+  // - Form submission creates Contact_Request__c record
+  // - FAQ section pulls from FAQ__c WHERE Category__c = 'General' AND Is_Active__c = true
+  
   return (
     <div className="min-h-screen">
       {/* Hero */}
