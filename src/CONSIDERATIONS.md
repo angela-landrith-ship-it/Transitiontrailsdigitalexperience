@@ -378,10 +378,10 @@ useEffect(() => {
 
 #### A. Lazy Load Components ⭐ HIGH PRIORITY
 ```tsx
-const DashboardPage = lazy(() => import('./components/pages/DashboardPage'));
+const AcademyPage = lazy(() => import('./components/pages/AcademyPage'));
 
 <Suspense fallback={<LoadingSpinner />}>
-  <DashboardPage />
+  <AcademyPage />
 </Suspense>
 ```
 

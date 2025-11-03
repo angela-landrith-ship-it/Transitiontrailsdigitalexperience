@@ -189,7 +189,12 @@ export function AcademyPage({ onNavigate }: AcademyPageProps) {
                 <div className="bg-white rounded-xl p-6 shadow-lg mb-6 sticky top-24">
                   <div className="text-center mb-6">
                     <div className="text-[var(--tt-sun-amber)] mb-2">{selectedCourseData.price}</div>
-                    <TTButton variant="accent" pulse className="w-full" onClick={() => onNavigate('dashboard')}>
+                    <TTButton 
+                      variant="accent" 
+                      pulse 
+                      className="w-full" 
+                      onClick={() => window.open('https://academy.transitiontrails.org', '_blank')}
+                    >
                       Enroll Now
                     </TTButton>
                   </div>

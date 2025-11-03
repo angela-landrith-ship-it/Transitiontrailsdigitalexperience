@@ -60,7 +60,6 @@ export function AIAssistant({ currentPage = 'home' }: AIAssistantProps) {
       services: "Hello! Interested in our nonprofit services? I can explain our Salesforce solutions, implementation support, or help you schedule a free assessment.",
       support: "Hi! Thank you for your interest in supporting our mission. I can tell you about donation options, volunteer opportunities, or our partnership program.",
       contact: "Hello! I'm here to help answer questions before you reach out. What would you like to know?",
-      dashboard: "Welcome back! I can help you navigate your active trails, recommend next steps, or answer questions about your learning journey.",
     };
     return welcomes[page] || welcomes.home;
   };
@@ -101,11 +100,6 @@ export function AIAssistant({ currentPage = 'home' }: AIAssistantProps) {
         "What are your hours?",
         "How do I enroll?",
         "Technical support",
-      ],
-      dashboard: [
-        "What should I learn next?",
-        "Show my progress",
-        "Upcoming events",
       ],
     };
     return suggestions[page] || suggestions.home;

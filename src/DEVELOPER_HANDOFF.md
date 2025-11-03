@@ -94,7 +94,8 @@ ORDER BY Display_Order__c ASC
 - `Last_Activity__c` (Date/Time) - Last engagement
 - `Status__c` (Picklist) - In Progress, Completed, Paused
 
-**Usage Location:** `/components/pages/DashboardPage.tsx`
+**Usage Location:** External Academy site (academy.transitiontrails.org)  
+**Note:** Trail progress tracking is handled in the separate learning management system.
 
 ---
 
@@ -162,7 +163,7 @@ ORDER BY Display_Order__c ASC
 - `Registration_URL__c` (URL) - Sign-up link
 - `Is_Active__c` (Checkbox) - Show/hide
 
-**Usage Location:** `/components/pages/DashboardPage.tsx` - Upcoming Events
+**Usage Location:** Contact page and external Academy site for event listings
 
 ---
 
@@ -245,7 +246,6 @@ All images should be stored in Salesforce CMS and referenced via secure URLs.
 | ServicesPage | `ttServicesPage` | `Service_Offering__c` |
 | SupportPage | `ttSupportPage` | `Impact_Stat__c`, `Partner__c` |
 | ContactPage | `ttContactPage` | `FAQ__c` |
-| DashboardPage | `ttDashboard` | `Trail_Progress__c`, `Event__c` |
 
 ---
 

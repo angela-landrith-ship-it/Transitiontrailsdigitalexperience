@@ -202,7 +202,7 @@ export function ContactPage() {
             {[
               {
                 question: 'How do I enroll in a trail program?',
-                answer: 'Visit our Our Trails page to explore programs, then click "Start This Trail" to begin the enrollment process. We\'ll guide you through the application and onboarding.',
+                answer: 'Visit our Academy page to explore programs and courses. Click "Enroll Now" on any course to be directed to our learning portal where you can complete the enrollment process.',
               },
               {
                 question: 'Are your courses really free?',

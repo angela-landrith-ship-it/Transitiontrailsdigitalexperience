@@ -14,10 +14,10 @@ A modern, accessible Salesforce Experience Cloud website for Transition Trails -
 ### Key Features
 
 ✨ **AI-Powered Assistant** - Trail Guide AI helps visitors navigate and find resources  
-📚 **Learning Academy** - Courses, trails, and certification programs  
+📚 **Learning Academy** - Courses, trails, and certification programs with external enrollment  
 🤝 **Nonprofit Services** - Salesforce implementation and support  
 💚 **Support Portal** - Donations, volunteering, and partnerships  
-📊 **Personalized Dashboard** - Track learning progress and goals  
+🔗 **External LMS Integration** - Seamless redirection to dedicated learning platform  
 
 ---
 
@@ -25,10 +25,10 @@ A modern, accessible Salesforce Experience Cloud website for Transition Trails -
 
 ```
 ├── /components
-│   ├── /pages           # Full page components (8 pages)
+│   ├── /pages           # 7 public page components (no dashboard)
 │   ├── /ui              # ShadCN UI components
 │   ├── AIAssistant.tsx  # AI chatbot widget
-│   ├── Navigation.tsx   # Sticky header navigation
+│   ├── Navigation.tsx   # Sticky header navigation (7 links)
 │   ├── Footer.tsx       # Site footer
 │   ├── TTButton.tsx     # Branded button component
 │   └── ...              # Additional components
@@ -90,17 +90,16 @@ This is a **reference implementation** for conversion to Salesforce Lightning We
 
 ### Site Structure
 
-**Public Pages** (Guest Access):
-- **Home** - Hero, audience cards, testimonials
-- **About** - Mission, team, timeline
-- **Our Trails** - Learning path catalog
-- **Academy** - Course listings with search
-- **Services** - Nonprofit Salesforce solutions
-- **Support** - Donations, volunteering, partnerships
-- **Contact** - Contact form and FAQ
+**Public Pages (7 Pages):**
+1. **Home** - Hero, audience cards, testimonials
+2. **About** - Mission, team, timeline
+3. **Our Trails** - Learning path catalog
+4. **Academy** - Course listings with search and external enrollment links
+5. **Services** - Nonprofit Salesforce solutions
+6. **Support** - Donations, volunteering, partnerships
+7. **Contact** - Contact form and FAQ
 
-**Authenticated Pages** (Requires Login):
-- **Dashboard** - Personalized learning portal, progress tracking
+**Note:** Academy enrollment and student dashboards are handled through a separate learning management system at academy.transitiontrails.org. Clicking "Enroll Now" on any course redirects users to this external platform.
 
 ---
 

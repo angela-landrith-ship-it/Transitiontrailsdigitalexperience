@@ -8,7 +8,6 @@ import { AcademyPage } from './components/pages/AcademyPage';
 import { ServicesPage } from './components/pages/ServicesPage';
 import { SupportPage } from './components/pages/SupportPage';
 import { ContactPage } from './components/pages/ContactPage';
-import { DashboardPage } from './components/pages/DashboardPage';
 import { CookieConsent } from './components/CookieConsent';
 import { BackToTop } from './components/BackToTop';
 import { AIAssistant } from './components/AIAssistant';
@@ -38,8 +37,6 @@ export default function App() {
         return <SupportPage onNavigate={handleNavigate} />;
       case 'contact':
         return <ContactPage />;
-      case 'dashboard':
-        return <DashboardPage onNavigate={handleNavigate} />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }

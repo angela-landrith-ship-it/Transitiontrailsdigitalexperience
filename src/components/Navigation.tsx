@@ -53,12 +53,6 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 )}
               </button>
             ))}
-            <button
-              onClick={() => onNavigate('dashboard')}
-              className="px-6 py-2 bg-[var(--tt-evergreen)] text-white rounded-lg hover:bg-[var(--tt-summit-teal)] transition-all duration-100"
-            >
-              Sign In
-            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,15 +85,6 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 {item.label}
               </button>
             ))}
-            <button
-              onClick={() => {
-                onNavigate('dashboard');
-                setMobileMenuOpen(false);
-              }}
-              className="block w-full text-left px-4 py-3 bg-[var(--tt-evergreen)] text-white rounded-lg hover:bg-[var(--tt-summit-teal)] transition-all"
-            >
-              Sign In
-            </button>
           </div>
         </div>
       )}
